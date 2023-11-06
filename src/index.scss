@@ -1,0 +1,222 @@
+@import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700");
+
+.container {
+  // gradient: https://webgradients.com
+  --bg: linear-gradient(-20deg, #000000 0%, #000000 100%);
+
+  position: relative;
+  height: 100vh;
+  background-image: var(--bg);
+
+  .slideshow {
+    $slide-bgs: url("https://i0.wp.com/indiacurrents.com/wp-content/uploads/2020/12/2.jpg?fit=785%2C515&ssl=1"),
+      url("https://www.91-cdn.com/hub/wp-content/uploads/2023/06/Courtroom-Drama-movies.jpg"),
+      url("https://i1.wp.com/www.zekagraphic.com/wp-content/uploads/2021/03/10-Best-Movie-Poster-Design-Cover.jpg?fit=1920%2C1080&ssl=1"),
+      url("https://playerxtreme.com/wp-content/uploads/2018/01/feature.jpg"),
+      url("https://midiaresearch.com/storage/uploads/blog/featured/1177/cover_image-1594998634.png"),
+      url("https://wallpapers.com/images/hd/marvel-superhero-8z8qnac9a48liakb.jpg"),
+      url("https://wallpapers.com/images/hd/marvel-heroes-7ubbr8usxnag4zif.jpg");
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 0;
+      height: 100%;
+      overflow: hidden;
+      animation: slide-right 0.6s ease-in-out forwards;
+
+      // use pseudo element to avoid the side effect of bg-size: cover
+      &::after {
+        position: absolute;
+        content: "";
+        top: 0;
+        left: 0;
+        width: 115vw;
+        height: 100%;
+      }
+
+      @for $i from 1 through length($slide-bgs) {
+        &:nth-child(#{$i}) {
+          animation-delay: 0.15s * $i;
+
+          &::after {
+            background: nth($slide-bgs, $i) center / cover no-repeat;
+          }
+        }
+      }
+    }
+
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-image: var(--bg);
+      transform: translateX(-100%);
+      animation: move-right 0.6s ease-in-out forwards;
+      animation-delay: 0.15s * length($slide-bgs) + 1s;
+
+      h1 {
+        font-size: 150%;
+        font-family: Lora, serif;
+        letter-spacing: 0.2em;
+        color: white;
+        text-shadow: 0 2px 2px black;
+
+        opacity: 0;
+        animation: fade-in 1s forwards;
+        // animation-delay: 0.15s * length($slide-bgs) + 1.7s;
+      }
+    }
+  }
+}
+
+@keyframes slide-right {
+  to {
+    // If you animate scaleX here, the image will look weird. So animate width instead.
+    // (a little damage on performance though)
+    width: 100%;
+  }
+}
+
+@keyframes move-right {
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes fade-in {
+  to {
+    opacity: 1;
+  }
+}
+
+#style-4::-webkit-scrollbar-track {
+  -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  background-color: #383838;
+  border-radius: 10px;
+}
+
+#style-4::-webkit-scrollbar {
+  width: 10px;
+  background-color: #565656;
+  border-radius: 10px;
+}
+
+#style-4::-webkit-scrollbar-thumb {
+  background-color: #000000;
+  border: 2px solid #555555;
+  border-radius: 10px;
+}
+.btn-back {
+  button {
+    background: #efefef;
+    background-image: linear-gradient(white, #ccc);
+    border: none;
+    border-radius: 0 0.5rem 0.5rem 0;
+    color: #4d4d4d;
+    font-family: Inter, sans-serif;
+    font-size: 24px;
+    font-witght: 600;
+    height: 64px;
+    line-height: 1;
+    padding: 1rem 2rem 1rem 1rem;
+    position: relative;
+    text-shadow: 0 1px 0 white;
+    box-shadow: inset 0 2px 0 0 rgba(black, 0.3),
+      // border
+      inset -2px 0 0 0 rgba(black, 0.3),
+      // border
+      inset 0 -2px 0 0 rgba(black, 0.3),
+      // border
+      inset 0 3px 0 0 white,
+      // highlight
+      0 3px 3px -3px rgba(black, 0.24),
+      // shadow
+      0 6px 6px -6px rgba(black, 0.12); // shadow
+
+    &:before {
+      background: #efefef;
+      background-image: linear-gradient(135deg, white, #ccc);
+      border-radius: 0.5rem;
+      bottom: 7px;
+      content: "";
+      height: 50px;
+      left: -24px;
+      position: absolute;
+      transform: rotate(45deg);
+      width: 50px;
+      z-index: -1;
+      box-shadow: inset 2px 0 0 0 rgba(black, 0.3),
+        // border
+        inset 0 -2px 0 0 rgba(black, 0.3),
+        // border
+        inset 3px 0 0 0 white,
+        // highlight
+        0 3px 3px -3px rgba(black, 0.24),
+        //shadow
+        0 6px 6px -6px rgba(black, 0.12); //shadow
+    }
+
+    &:hover,
+    &:focus {
+      outline: none;
+      background-image: linear-gradient(white, #ddd);
+      box-shadow: inset 0 2px 0 0 dodgerblue,
+        // border
+        inset -2px 0 0 0 dodgerblue,
+        // border
+        inset 0 -2px 0 0 dodgerblue,
+        // border
+        inset 0 3px 0 0 white,
+        // highlight
+        0 6px 6px -6px rgba(black, 0.12),
+        // shadow
+        0 9px 9px -9px rgba(black, 0.06); // shadow
+
+      &:before {
+        background-image: linear-gradient(135deg, white, #ddd);
+        box-shadow: inset 2px 0 0 0 dodgerblue,
+          // border
+          inset 0 -2px 0 0 dodgerblue,
+          // border
+          inset 3px 0 0 0 white,
+          // highlight
+          0 6px 6px -6px rgba(black, 0.12),
+          //shadow
+          0 9px 9px -9px rgba(black, 0.06); //shadow
+      }
+    }
+
+    &:active {
+      background-image: linear-gradient(#ccc, #eee);
+      box-shadow: inset 0 2px 0 0 dodgerblue,
+        // border
+        inset -2px 0 0 0 dodgerblue,
+        // border
+        inset 0 -2px 0 0 dodgerblue,
+        // border
+        inset 0 3px 3px -3px rgba(black, 0.3); // shadow
+
+      &:before {
+        background-image: linear-gradient(135deg, #ccc, #eee);
+        box-shadow: inset 2px 0 0 0 dodgerblue,
+          // border
+          inset 0 -2px 0 0 dodgerblue,
+          // border
+          inset 3px 0 3px -3px rgba(black, 0.3); // shadow
+      }
+    }
+  }
+}
